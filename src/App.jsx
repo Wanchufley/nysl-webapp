@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home.jsx';
+import Schedule from './components/Schedule.jsx';
 import { auth } from './firebase';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
@@ -31,7 +33,12 @@ function App() {
     }
   };
 
-  return <Home user={user} onSignIn={handleSignIn} onSignOut={handleSignOut} />;
+    return (
+      <Routes>
+        <Route path="/" element={<Home user={user} onSignIn={handleSignIn} onSignOut={handleSignOut} />} />
+        <Route path="/schedule" element={<Schedule />} />
+      </Routes>
+  );
 }
 
 export default App;
