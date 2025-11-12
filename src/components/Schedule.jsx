@@ -7,7 +7,7 @@ const Schedule = () => {
   const [data, setData] = useState({ locations: {}, games: {} });
 
   useEffect(() => {
-    const dbRef = ref(db); 
+    const dbRef = ref(db);
     const callback = (snapshot) => {
       if (snapshot.exists()) {
         setData(snapshot.val());
@@ -45,6 +45,9 @@ const Schedule = () => {
                     const locationInfo = locations[game.location];
                     return (
                       <tr key={id}>
+                        <td className="p-3 border-b text-blue-600 underline">
+                          <a href={`/game-details/${id}`}>View</a>
+                        </td>
                         <td>{game.date || "N/A"}</td>
                         <td>{game.time || "N/A"}</td>
                         <td>{game.teams || "N/A"}</td>

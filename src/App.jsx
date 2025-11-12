@@ -5,6 +5,7 @@ import Home from './components/Home.jsx';
 import Schedule from './components/Schedule.jsx';
 import { auth } from './firebase';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import GameDetails from './components/GameDetails.jsx';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,11 +34,12 @@ function App() {
     }
   };
 
-    return (
-      <Routes>
-        <Route path="/" element={<Home user={user} onSignIn={handleSignIn} onSignOut={handleSignOut} />} />
-        <Route path="/schedule" element={<Schedule />} />
-      </Routes>
+  return (
+    <Routes>
+      <Route path="/" element={<Home user={user} onSignIn={handleSignIn} onSignOut={handleSignOut} />} />
+      <Route path="/schedule" element={<Schedule />} />
+      <Route path="/game-details/:id" element={<GameDetails />} />
+    </Routes>
   );
 }
 
