@@ -1,20 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import NavigationBar from './NavigationBar.jsx';
 
-const NavigationMenu = ({ user, onSignIn, onSignOut }) => {
+const NavigationMenu = () => {
   return (
     <div className="container-fluid bg-dark min-vh-100 d-flex justify-content-center align-items-center">
-      <div className="card bg-dark text-white border-0 p-4 p-md-5 rounded-4" style={{ maxWidth: '450px', width: '100%' }}>
-        <div className="position-absolute top-0 end-0 p-3">
-          {user ? (
-            <button onClick={onSignOut} className="btn btn-outline-light rounded-pill py-2 fs-5">
-              Sign Out
-            </button>
-          ) : (
-            <button onClick={onSignIn} className="btn btn-outline-light rounded-pill py-2 fs-5">
-              Sign In
-            </button>
-          )}
+      <div className="card bg-dark text-white border-0 p-4 p-md-5 rounded-4" style={{ maxWidth: '400px', width: '100%' }}>
+        <div>
+          <NavigationBar />
         </div>
         <div className="card-body text-center">
           <h1 className="mb-5 fw-bold display-5">
