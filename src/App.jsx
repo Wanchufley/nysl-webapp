@@ -7,6 +7,7 @@ import { auth } from './firebase';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import GameDetails from './components/GameDetails.jsx';
 import GameMessages from './components/GameMessages.jsx';
+import GamePhotos from './components/GamePhotos.jsx';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -71,6 +72,16 @@ function App() {
         path="/game-details/:id/messages"
         element={
           <GameMessages
+            user={user}
+            onSignIn={handleSignIn}
+            onSignOut={handleSignOut}
+          />
+        }
+      />
+      <Route
+        path="/game-details/:id/photos"
+        element={
+          <GamePhotos
             user={user}
             onSignIn={handleSignIn}
             onSignOut={handleSignOut}
