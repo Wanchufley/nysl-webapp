@@ -3,7 +3,7 @@ import { db } from '../firebase.js';
 import { ref, onValue, off } from 'firebase/database';
 import NavigationBar from './NavigationBar.jsx';
 
-const Schedule = () => {
+const Schedule = ({ user, onSignIn, onSignOut }) => {
   const [data, setData] = useState({ locations: {}, games: {} });
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Schedule = () => {
   return (
     <div className="container-fluid bg-dark min-vh-100 d-flex justify-content-center align-items-center">
       <div className="card bg-dark text-white border-0 p-4 p-md-5 rounded-4" style={{ maxWidth: '900px', width: '100%' }}>
-        <NavigationBar />
+        <NavigationBar user={user} onSignIn={onSignIn} onSignOut={onSignOut} />
         <div className="card-body text-center">
           <h2 className="mb-5 fw-bold display-5">Game Schedule</h2>
           <div className="table-responsive">

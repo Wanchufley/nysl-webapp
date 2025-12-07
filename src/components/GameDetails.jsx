@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDatabase, ref, onValue, get } from "firebase/database";
 import { app } from "../firebase.js";
+import NavigationBar from "./NavigationBar.jsx";
 
-export default function GameDetails() {
+export default function GameDetails({ user, onSignIn, onSignOut }) {
   const { id } = useParams(); // e.g. "2021_09_01_1"
   const navigate = useNavigate();
   const [game, setGame] = useState(null);
@@ -52,19 +53,16 @@ export default function GameDetails() {
     return () => unsubscribe();
   }, [id]);
 
-  // --- Loading State ---
-  if (loading) {
-    return (
-      <div className="container-fluid bg-dark min-vh-100 d-flex justify-content-center align-items-center">
-        <div className="text-white fs-4">Loading game details...</div>
-      </div>
-    );
-  }
+  // Shared shell for loading, error, and main content
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <div className="text-white fs-4 text-center">Loading game details...</div>
+      );
+    }
 
-  // --- Error State ---
-  if (error) {
-    return (
-      <div className="container-fluid bg-dark min-vh-100 d-flex justify-content-center align-items-center">
+    if (error) {
+      return (
         <div
           className="card bg-dark text-white border-0 p-4 p-md-5 rounded-4"
           style={{ maxWidth: "400px", width: "100%" }}
@@ -73,24 +71,27 @@ export default function GameDetails() {
             <h2 className="fw-bold mb-3">Error</h2>
             <p className="text-danger">{error}</p>
             <button
-              onClick={() => navigate("/schedules")}
+              onClick={() => navigate("/schedule")}
               className="btn btn-outline-light rounded-pill mt-3 py-2 fs-5"
             >
               ← Back to Schedules
             </button>
           </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
 
-  // --- Main Page ---
-  return (
-    <div className="container-fluid bg-dark min-vh-100 d-flex justify-content-center align-items-center">
+    return (
       <div
         className="card bg-dark text-white border-0 p-4 p-md-5 rounded-4"
         style={{ maxWidth: "1100px", width: "100%" }}
       >
+        <NavigationBar
+          user={user}
+          onSignIn={onSignIn}
+          onSignOut={onSignOut}
+          currentGameId={id}
+        />
         <div className="card-body">
           <h1 className="mb-5 fw-bold display-5 text-center">
             <span className="animated-gradient">Game Details</span>
@@ -148,6 +149,12 @@ export default function GameDetails() {
           </div>
         </div>
       </div>
+    );
+  };
+
+  return (
+    <div className="container-fluid bg-dark min-vh-100 d-flex justify-content-center align-items-center">
+      {renderContent()}
     </div>
   );
 }

@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NavigationBar from './NavigationBar.jsx';
 
-const NavigationMenu = () => {
+const NavigationMenu = ({ user, onSignIn, onSignOut }) => {
   return (
     <div className="container-fluid bg-dark min-vh-100 d-flex justify-content-center align-items-center">
       <div className="card bg-dark text-white border-0 p-4 p-md-5 rounded-4" style={{ maxWidth: '400px', width: '100%' }}>
         <div>
-          <NavigationBar />
+          <NavigationBar user={user} onSignIn={onSignIn} onSignOut={onSignOut} />
         </div>
         <div className="card-body text-center">
           <h1 className="mb-5 fw-bold display-5">

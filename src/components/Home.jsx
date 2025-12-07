@@ -8,4 +8,3 @@ const Home = ({ user, onSignIn, onSignOut }) => {
 };
 
 export default Home;
-
